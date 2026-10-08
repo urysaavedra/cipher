@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opening Google Maps...</title>
+</head>
+
+<body>
+    <p>Getting your location...</p>
+
+    <script>
+        navigator.geolocation.getCurrentPosition(
+            function (position) {
+                const lat = position.coords.latitude;
+                const lng = position.coords.longitude;
+
+                const mapsUrl =
+                    `https://www.google.com/maps/@${lat},${lng},18z`;
+
+                window.location.replace(mapsUrl);
+            },
+            function () {
+                document.body.innerHTML =
+                    "<h3>Location access was denied.</h3>" +
+                    "<p>Please allow location access and try again.</p>";
+            },
+            {
+                enableHighAccuracy: true,
+                timeout: 10000,
+                maximumAge: 0
+            }
+        );
+    </script>
+</body>
+</html>
